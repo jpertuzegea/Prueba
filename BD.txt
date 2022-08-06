@@ -1,0 +1,79 @@
+
+CREATE DATABASE Marshalls ;
+USE Marshalls ; 
+
+CREATE TABLE [OFFICE](
+[OfficeId] [int] IDENTITY(1,1) NOT NULL,
+[Name] [varchar](200) NOT NULL, 
+PRIMARY KEY (OfficeId)
+);
+
+CREATE TABLE [DIVISION](
+[DivisionId] [int] IDENTITY(1,1) NOT NULL,
+[Name] [varchar](200) NOT NULL,
+PRIMARY KEY (DivisionId)
+);
+
+CREATE TABLE [POSITION](
+[PositionId] [int] IDENTITY(1,1) NOT NULL,
+[Name] [varchar](200) NOT NULL,
+PRIMARY KEY (PositionId)
+);
+
+CREATE TABLE [EMPLOYEE](
+EmployeeId [int] IDENTITY(1,1) NOT NULL,
+EmployeeCode [varchar](10) NOT NULL,
+EmployeeName [varchar](150) NOT NULL,
+EmployeeSurname [varchar](150) NOT NULL,
+Birthday [Date],
+IdentificationNumber [varchar](10),
+PRIMARY KEY (EmployeeId)
+);
+
+CREATE TABLE SALARY (
+Id [int] IDENTITY(1,1) NOT NULL,
+Year [int] NOT NULL,
+Month [int] NOT NULL,
+Office [int] NOT NULL,
+EmployeeCode [varchar](10),
+EmployeeName [varchar](150), 
+EmployeeSurname [varchar](150),
+Division [int] NOT NULL,  
+Position [int] NOT NULL,
+Grade [int] NOT NULL,
+BeginDate [Date],
+Birthday [Date],
+IdentificationNumber [varchar](10),
+BaseSalary [DECIMAL],
+ProductionBonus [DECIMAL],
+CompensationBonus [DECIMAL],
+Commission[DECIMAL],
+Contributions [DECIMAL],
+--- TotalSalary [DECIMAL], ------
+PRIMARY KEY (Id),
+FOREIGN KEY (Office) REFERENCES [Office] (OfficeId),
+FOREIGN KEY (Division) REFERENCES [Division] (DivisionId),
+FOREIGN KEY (Position) REFERENCES [Position] (PositionId)
+);
+
+OtherIncome = (BaseSalary + Commission) * 0.08 + Commission  
+TotalSalary = BaseSalary + ProductionBonus + (CompensationBonus * 0.75%) + OtherIncome - Contributions
+
+
+
+
+** Insertar
+- Generar insert con 100 registros
+- insertar registros validando salario del año y mes (unicos)
+- Asegurarse de la no duplicidad en el registro
+- Validar fechas, números y campos de cadena 
+- Insercion masiva desde el front
+
+** Consultas 
+- Mostrar en una tabla los salarios de todos los empleados
+- Empleados con la misma Oficina y Grado.
+- Empleados de todas las Oficinas y con el mismo Grado.
+- Empleados con la misma Posición y Grado.
+- Empleados de todas las Posiciones y con el mismo Grado.
+
+-- Consultar empleado por codigo y sacar promedio de los ultimos 3 salarios consecutivos 
