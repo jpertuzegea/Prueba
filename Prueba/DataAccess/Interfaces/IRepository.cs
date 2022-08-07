@@ -1,4 +1,12 @@
-﻿namespace DataAccess.Interfaces
+﻿//----------------------------------------------------------------------- 
+// Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <author>Jorge Pertuz Egea/Jpertuz</author>
+// <date>Agosto 2022</date>
+//-----------------------------------------------------------------------
+
+
+namespace DataAccess.Interfaces
 {
     using System;
     using System.Collections.Generic;

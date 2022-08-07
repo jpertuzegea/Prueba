@@ -1,9 +1,15 @@
-﻿using DataAccess.Entitys;
+﻿//----------------------------------------------------------------------- 
+// Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <author>Jorge Pertuz Egea/Jpertuz</author>
+// <date>Agosto 2022</date>
+//-----------------------------------------------------------------------
+
+
+using DataAccess.Entitys;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccess
 {

@@ -24,6 +24,14 @@ namespace Prueba
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.AddControllers().AddNewtonsoftJson(options => { options.UseMemberCasing(); });// Convierte Json Salida en CamellCAse -- Microsoft.AspNetCore.Mvc.NewtonsoftJson
+             
+            services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +59,8 @@ namespace Prueba
             {
                 endpoints.MapRazorPages();
             });
+
+
         }
     }
 }

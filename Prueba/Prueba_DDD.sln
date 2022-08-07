@@ -13,13 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. API", "3. API", "{AA6AAF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. TestUnit", "4. TestUnit", "{7AB61B4E-5953-4A60-822F-ED109B8C91A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{42774E81-F80B-4F24-A363-3973E7B1668B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{42774E81-F80B-4F24-A363-3973E7B1668B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{1DF577FD-60D7-4F2B-B999-AE70855890CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{1DF577FD-60D7-4F2B-B999-AE70855890CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{E808E1D8-6FC1-4A4D-A9B2-AFBB511AC340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{E808E1D8-6FC1-4A4D-A9B2-AFBB511AC340}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42774E81-F80B-4F24-A363-3973E7B1668B} = {42774E81-F80B-4F24-A363-3973E7B1668B}
+		{1DF577FD-60D7-4F2B-B999-AE70855890CB} = {1DF577FD-60D7-4F2B-B999-AE70855890CB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba_DDD_Test", "Prueba_DDD_Test\Prueba_DDD_Test.csproj", "{79EC5A27-2DD6-4899-BF64-89B4C49EFC5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prueba_DDD_Test", "Prueba_DDD_Test\Prueba_DDD_Test.csproj", "{79EC5A27-2DD6-4899-BF64-89B4C49EFC5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

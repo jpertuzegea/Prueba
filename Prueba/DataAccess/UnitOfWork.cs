@@ -1,4 +1,12 @@
-﻿using DataAccess.Interfaces;
+﻿//----------------------------------------------------------------------- 
+// Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <author>Jorge Pertuz Egea/Jpertuz</author>
+// <date>Agosto 2022</date>
+//-----------------------------------------------------------------------
+
+
+using DataAccess.Interfaces;
 using DataAccess.Repositories;
 using System;
 
@@ -9,9 +17,9 @@ namespace DataAccess
         private bool disposedValue;
         private readonly ContextDB PruebaContextDB;
 
-        public UnitOfWork(ContextDB _PagaSoftContextDB)
+        public UnitOfWork(ContextDB _PruebaContextDB)
         {
-            this.PruebaContextDB = _PagaSoftContextDB;
+            this.PruebaContextDB = _PruebaContextDB;
         }
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class

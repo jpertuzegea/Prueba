@@ -1,4 +1,12 @@
-﻿namespace DataAccess.Repositories
+﻿//----------------------------------------------------------------------- 
+// Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <author>Jorge Pertuz Egea/Jpertuz</author>
+// <date>Agosto 2022</date>
+//-----------------------------------------------------------------------
+
+
+namespace DataAccess.Repositories
 {
     using DataAccess.Interfaces;
     using Microsoft.EntityFrameworkCore;

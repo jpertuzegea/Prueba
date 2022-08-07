@@ -5,15 +5,14 @@
 // <date>Agosto 2022</date>
 //-----------------------------------------------------------------------
 
-
-using System.ComponentModel.DataAnnotations;
-
-namespace DataAccess.Entitys
+namespace Services.DTO
 {
-    public class POSITION
+    public class ResultModel
     {
-        [Key]
-        public int? PositionId { get; set; }
-        public string Name { get; set; }
+        public bool HasError { get; set; }
+        public string? Messages { get; set; }
+        public object? Data { get; set; }
+
     }
+
 }
