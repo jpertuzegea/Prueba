@@ -5,13 +5,13 @@
 // <date>Agosto 2022</date>
 //-----------------------------------------------------------------------
 
-namespace Services.DTO
+namespace Services.DTO.Response
 {
     public class ResultDto
     {
         public bool HasError { get; set; }
-        public string? Messages { get; set; }
-        public object? Data { get; set; }
+        public string Messages { get; set; }
+        public object Data { get; set; }
 
     }
 

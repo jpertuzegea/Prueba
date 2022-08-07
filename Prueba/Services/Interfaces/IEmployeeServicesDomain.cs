@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------
 
 using Entities;
-using Services.DTO;
+using Services.DTO.Response;
 using System.Threading.Tasks;
 
 namespace Services.Interfaces

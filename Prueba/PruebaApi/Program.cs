@@ -1,11 +1,12 @@
+//----------------------------------------------------------------------- 
+// Copyright (c) 2019 All rights reserved.
+// </copyright>
+// <author>Jorge Pertuz Egea/Jpertuz</author>
+// <date>Agosto 2022</date>
+//-----------------------------------------------------------------------
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PruebaApi
 {

@@ -7,13 +7,13 @@
 
 using DataAccess.Entitys;
 using DataAccess.Interfaces;
-using System.Linq;
+using Entities;
 using Microsoft.Extensions.Logging;
-using Services.DTO;
+using Services.DTO.Response;
 using Services.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
-using Entities;
 
 namespace Services
 {

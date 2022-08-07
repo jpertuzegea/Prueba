@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Mvc;
-using Services.DTO;
+using Services.DTO.Response;
 using Services.Interfaces;
 using System.Threading.Tasks;
 
