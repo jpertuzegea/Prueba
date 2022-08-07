@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SecurityModule } from './Pages/Security/security.module'; 
 import { SharedModule } from './Pages/Shared/shared.module'; 
 import { AuthModule } from './Pages/Auth/auth.module';
+import { QueryModule } from './Pages/Querys/query.module';
 
 @NgModule({
    
@@ -18,7 +19,8 @@ import { AuthModule } from './Pages/Auth/auth.module';
     AppRoutingModule,    
     SecurityModule,
     AuthModule,   
-    SharedModule 
+    SharedModule,
+    QueryModule
   ],
 
   providers: [],

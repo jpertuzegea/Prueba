@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
 import { AuthRoutingModule } from './Pages/Auth/auth-routing.module';
+import { QuerysRoutingModule } from './Pages/Querys/querys-routing.module';
 import { SecurityRoutingModule } from './Pages/Security/security-routing.module';
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     AuthRoutingModule,
-    SecurityRoutingModule
+    SecurityRoutingModule,
+    QuerysRoutingModule
   ],
 
   exports: [RouterModule]
