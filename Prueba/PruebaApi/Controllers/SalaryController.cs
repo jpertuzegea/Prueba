@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Mvc;
+using PruebaApi.Models;
 using Services.DTO.Response;
 using Services.Interfaces;
 using System.Threading.Tasks;
@@ -24,53 +25,31 @@ namespace PruebaApi.Controllers
         {
             this.ISalaryServicesDomain = I_SalaryServicesDomain;
         }
-
-
-        // GetAllSalariesOfEmployees();
-
-        // GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade(int OfficeId, int Grade);
-
-        // GetEmployeesWithEqualsGradeByGrade(int Grade);
-
-        // GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade(int Position, int Grade);
-
-        // GetEmployeesWithEqualsGradeByGradexxx(int Grade);
-
-
+ 
 
         [HttpGet("GetAllSalariesOfEmployees")]
         public async Task<ActionResult<ResultDto>> GetAllSalariesOfEmployees()
         {
             return await ISalaryServicesDomain.GetAllSalariesOfEmployees();
         }
+         
+        [HttpPost("GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade")]
+        public async Task<ActionResult<ResultDto>> GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade([FromBody] RequestSalaryDto data)
+        {
+            return await ISalaryServicesDomain.GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade(data.OfficeId, data.Grade);
+        }
 
+        [HttpPost("GetEmployeesWithEqualsGradeByGrade")]
+        public async Task<ActionResult<ResultDto>> GetEmployeesWithEqualsGradeByGrade([FromBody] RequestSalaryDto data)
+        {
+            return await ISalaryServicesDomain.GetEmployeesWithEqualsGradeByGrade(data.Grade);
+        }
 
-
-        //[HttpPost("UserAdd")]
-        //public async Task<ActionResult<ResultModel>> UserAdd([FromBody] Users UserModel)
-        //{
-        //    return await I_Bll_Users.UserAdd(UserModel);
-        //}
-
-
-
-        //[HttpPost("GetUserByUserId")]
-        //public async Task<ActionResult<ResultModel>> GetUserByUserId([FromBody] int UserId)
-        //{
-        //    return await I_Bll_Users.GetUserByUserId(UserId);
-        //}
-
-        //[HttpPut("UserUpdt")]
-        //public async Task<ActionResult<ResultModel>> UserUpdt([FromBody] Users UserModel)
-        //{
-        //    return await I_Bll_Users.UserUpdate(UserModel);
-        //}
-
-
-
-
-
-
-
+        [HttpPost("GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade")]
+        public async Task<ActionResult<ResultDto>> GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade([FromBody] RequestSalaryDto data)
+        {
+            return await ISalaryServicesDomain.GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade(data.Position, data.Grade);
+        }
+         
     }
 }
