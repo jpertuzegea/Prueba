@@ -49,12 +49,20 @@ ProductionBonus [DECIMAL],
 CompensationBonus [DECIMAL],
 Commission[DECIMAL],
 Contributions [DECIMAL],
---- TotalSalary [DECIMAL], ------
+TotalSalary [DECIMAL], ------
 PRIMARY KEY (Id),
 FOREIGN KEY (Office) REFERENCES [Office] (OfficeId),
 FOREIGN KEY (Division) REFERENCES [Division] (DivisionId),
 FOREIGN KEY (Position) REFERENCES [Position] (PositionId)
 );
+
+
+-- drop table SALARY;
+-- drop table [EMPLOYEE];
+-- drop table [POSITION];
+-- drop table [DIVISION];
+-- drop table [OFFICE];
+
 
 OtherIncome = (BaseSalary + Commission) * 0.08 + Commission  
 TotalSalary = BaseSalary + ProductionBonus + (CompensationBonus * 0.75%) + OtherIncome - Contributions
@@ -77,3 +85,5 @@ TotalSalary = BaseSalary + ProductionBonus + (CompensationBonus * 0.75%) + Other
 - Empleados de todas las Posiciones y con el mismo Grado.
 
 -- Consultar empleado por codigo y sacar promedio de los ultimos 3 salarios consecutivos 
+
+api/Salary/GetAllSalariesOfEmployees

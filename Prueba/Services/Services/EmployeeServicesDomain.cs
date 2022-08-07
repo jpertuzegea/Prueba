@@ -23,7 +23,6 @@ namespace Services
         private readonly IUnitOfWork unitofwork;
         private readonly ILogger<EmployeeServicesDomain> logger;
 
-
         public EmployeeServicesDomain(IUnitOfWork _unitofwork, ILogger<EmployeeServicesDomain> logger)
         {
             this.unitofwork = _unitofwork;
@@ -31,11 +30,9 @@ namespace Services
         }
 
 
-
-
-        public async Task<ResultModel> GetAllEmployees()
+        public async Task<ResultDto> GetAllEmployees()
         {
-            ResultModel ResultModel = new ResultModel();
+            ResultDto ResultModel = new ResultDto();
 
             try
             {
@@ -58,9 +55,9 @@ namespace Services
             }
         }
 
-        public async Task<ResultModel> GetEmployeeById(int id)
+        public async Task<ResultDto> GetEmployeeById(int id)
         {
-            ResultModel ResultModel = new ResultModel();
+            ResultDto ResultModel = new ResultDto();
 
             if (id <= 0)
             {
@@ -76,7 +73,7 @@ namespace Services
                 ResultModel = null;
 
                 var emplo = (await unitofwork.GetRepository<EMPLOYEE>().Get(x => x.EmployeeId == id)).FirstOrDefault();
-               
+
                 if (emplo != null)
                 {
                     ResultModel.HasError = false;
@@ -89,7 +86,7 @@ namespace Services
                     ResultModel.Messages = "Empleado No Encontrado";
                     ResultModel.Data = emplo;
                 }
-                 
+
                 return ResultModel;
             }
             catch (Exception Error)
@@ -101,11 +98,13 @@ namespace Services
                 return ResultModel;
             }
         }
+         
 
-
-        public async Task<ResultModel> SaveEmployee(EmployeeDomainEntity employee)
-        {
-             
+        public async Task<ResultDto> SaveEmployee(EmployeeDomainEntity employee)
+        {  
+            return null;
+            //  var xx = await unitofwork.GetRepository<EMPLOYEE>().Add();
         }
+
     }
 }

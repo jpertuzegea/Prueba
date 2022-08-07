@@ -7,7 +7,7 @@
 
 namespace Services.DTO
 {
-    public class ResultModel
+    public class ResultDto
     {
         public bool HasError { get; set; }
         public string? Messages { get; set; }

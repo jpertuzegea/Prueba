@@ -10,7 +10,7 @@ namespace Entities
         public string EmployeeSurname { get; private set; }
         public string IdentificationNumber { get; private set; }
         public DateTime Birthday { get; private set; }
-
+        public int Age { get; private set; }
 
         internal EmployeeDomainEntity()
         {
@@ -26,10 +26,12 @@ namespace Entities
             EmployeeSurname = employeeSurname;
             IdentificationNumber = identificationNumber;
             Birthday = birthday;
+
+            Age = (DateTime.Now.Year - birthday.Year);
         }
 
 
-
+       
 
 
     }

@@ -13,9 +13,9 @@ namespace Services.Interfaces
 {
     public interface IEmployeeServicesDomain
     {
-        Task<ResultModel> GetAllEmployees();
-        Task<ResultModel> GetEmployeeById(int id);
-        Task<ResultModel> SaveEmployee(EmployeeDomainEntity employeeDto);
+        Task<ResultDto> GetAllEmployees();
+        Task<ResultDto> GetEmployeeById(int id);
+        Task<ResultDto> SaveEmployee(EmployeeDomainEntity employeeDto);
     }
 
 
