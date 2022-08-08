@@ -24,8 +24,7 @@ import { EmployeesAverageSalaryComponent } from './employees-average-salary/empl
 
   imports: [
     RouterModule,
-    BrowserModule,
-    CommonModule,
+    BrowserModule, 
     SharedModule,
   ],
 

@@ -14,7 +14,10 @@ namespace Services.Interfaces
     {
         Task<ResultDto> GetAllSalariesOfEmployees();
 
-        Task<ResultDto> GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade(int OfficeId, int Grade);
+        Task<ResultDto> GetAllSalariesOfEmployees(int OfficeId, int Grade, int Position);
+
+
+
 
         Task<ResultDto> GetEmployeesWithEqualsGradeByGrade(int Grade);
 

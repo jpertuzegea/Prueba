@@ -5,6 +5,7 @@
 // <date>Agosto 2022</date>
 //-----------------------------------------------------------------------
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PruebaApi.Models;
 using Services.DTO.Response;
@@ -25,19 +26,26 @@ namespace PruebaApi.Controllers
         {
             this.ISalaryServicesDomain = I_SalaryServicesDomain;
         }
- 
+
 
         [HttpGet("GetAllSalariesOfEmployees")]
+        [AllowAnonymous]
         public async Task<ActionResult<ResultDto>> GetAllSalariesOfEmployees()
         {
             return await ISalaryServicesDomain.GetAllSalariesOfEmployees();
         }
-         
-        [HttpPost("GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade")]
-        public async Task<ActionResult<ResultDto>> GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade([FromBody] RequestSalaryDto data)
+
+        [HttpPost("GetAllSalariesOfEmployees")]
+        public async Task<ActionResult<ResultDto>> GetAllSalariesOfEmployees([FromBody] RequestSalaryDto data)
         {
-            return await ISalaryServicesDomain.GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade(data.OfficeId, data.Grade);
+            return await ISalaryServicesDomain.GetAllSalariesOfEmployees(data.OfficeId, data.Grade, data.Position);
         }
+
+
+
+
+
+
 
         [HttpPost("GetEmployeesWithEqualsGradeByGrade")]
         public async Task<ActionResult<ResultDto>> GetEmployeesWithEqualsGradeByGrade([FromBody] RequestSalaryDto data)
@@ -50,6 +58,6 @@ namespace PruebaApi.Controllers
         {
             return await ISalaryServicesDomain.GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade(data.Position, data.Grade);
         }
-         
+
     }
 }

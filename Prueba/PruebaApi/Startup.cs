@@ -8,19 +8,14 @@
 using DataAccess;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Services.DTO;
 using Services.Interfaces;
 using Services.Services;
-using System;
-using System.Text;
 
 namespace PruebaApi
 {
@@ -37,41 +32,50 @@ namespace PruebaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            JWTAuthentication JWTAuthenticationSection = Configuration.GetSection("JWTAuthentication").Get<JWTAuthentication>();
+            //JWTAuthentication JWTAuthenticationSection = Configuration.GetSection("JWTAuthentication").Get<JWTAuthentication>();
 
 
 
-            var key = Encoding.ASCII.GetBytes(JWTAuthenticationSection.Secret);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTAuthenticationSection.Secret)),
+            //var key = Encoding.ASCII.GetBytes(JWTAuthenticationSection.Secret);
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(x =>
+            //{
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTAuthenticationSection.Secret)),
 
-                    ValidateIssuer = false,
-                    ValidIssuer = "",
+            //        ValidateIssuer = false,
+            //        ValidIssuer = "",
 
-                    ValidateAudience = false,
-                    ValidAudience = "",
+            //        ValidateAudience = false,
+            //        ValidAudience = "",
 
-                    ValidateLifetime = true,
-                    RequireExpirationTime = true,
-                    ClockSkew = TimeSpan.FromMilliseconds(2)
-                };
-            });
+            //        ValidateLifetime = true,
+            //        RequireExpirationTime = true,
+            //        ClockSkew = TimeSpan.FromMilliseconds(2)
+            //    };
+            //});
 
 
             services.AddDbContext<ContextDB>(opt => opt.UseSqlServer(Configuration.GetConnectionString("BDConnetion")));
 
+            services.AddControllers().AddNewtonsoftJson(options => { options.UseMemberCasing(); });// Convierte Json Salida en CamellCAse -- Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+
+
             services.AddScoped<ISalaryServicesDomain, SalaryServicesDomain>();
             services.AddScoped<ISecurityServicesDomain, SecurityServicesDomain>();
+            services.AddScoped<IDivisionServicesDomain, DivisionServicesDomain>();
+            services.AddScoped<IPositionServicesDomain, PositionServicesDomain>();
+            services.AddScoped<IOficeServicesDomain, OficeServicesDomain>();
+
+
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -101,6 +105,12 @@ namespace PruebaApi
 
             app.UseRouting();
 
+            app.UseCors(x => x
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

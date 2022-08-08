@@ -7,6 +7,7 @@ import { SecurityModule } from './Pages/Security/security.module';
 import { SharedModule } from './Pages/Shared/shared.module'; 
 import { AuthModule } from './Pages/Auth/auth.module';
 import { QueryModule } from './Pages/Querys/query.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    
@@ -20,7 +21,8 @@ import { QueryModule } from './Pages/Querys/query.module';
     SecurityModule,
     AuthModule,   
     SharedModule,
-    QueryModule
+    QueryModule,
+    HttpClientModule
   ],
 
   providers: [],

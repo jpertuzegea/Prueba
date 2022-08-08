@@ -5,16 +5,23 @@
 // <date>Agosto 2022</date>
 //-----------------------------------------------------------------------
 
+using System;
+
 namespace Services.DTO.Response
 {
     public class SalaryEmployeesDto
     {
-        public int? Id { get; set; }
-        public int Year { get; set; }
-        public int Month { get; set; }
-        public string EmployeeCode { get; set; }
-        public string EmployeeName { get; set; }
-        public string IdentificationNumber { get; set; }
+        public int? Id { get; set; }       
+        public string FullName { get; set; }
+        public int Division { get; set; }
+        public string DivisionName { get; set; }
+        public int Position { get; set; }
+        public string PositionName { get; set; }
+        public int Grade { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime Birthday { get; set; }
+        public string IdentificationNumber { get; set; } 
         public decimal TotalSalary { get; set; }
+         
     }
 }

@@ -21,12 +21,20 @@ namespace Services.Services
     {
 
         private readonly IUnitOfWork unitofwork;
+        private readonly IDivisionServicesDomain IDivisionServicesDomain;
+        private readonly IPositionServicesDomain IPositionServicesDomain;
+
+
         private readonly ILogger<SalaryServicesDomain> logger;
 
-        public SalaryServicesDomain(IUnitOfWork _unitofwork, ILogger<SalaryServicesDomain> logger)
+
+        public SalaryServicesDomain(IUnitOfWork _unitofwork, ILogger<SalaryServicesDomain> logger, IDivisionServicesDomain I_DivisionServicesDomain, IPositionServicesDomain I_PositionServicesDomain)
         {
             this.unitofwork = _unitofwork;
             this.logger = logger;
+            this.IDivisionServicesDomain = I_DivisionServicesDomain;
+            this.IPositionServicesDomain = I_PositionServicesDomain;
+
         }
 
 
@@ -43,21 +51,26 @@ namespace Services.Services
 
                 if (List.Any())
                 {
-                    var obj = List.Select(item =>
-                      {
-                          SalaryEmployeesDto SalaryEmployeesDto = new SalaryEmployeesDto();
+                    foreach (var item in List)
+                    {
+                        SalaryEmployeesDto SalaryEmployeesDto = new SalaryEmployeesDto();
 
-                          SalaryEmployeesDto.Id = item.Id;
-                          SalaryEmployeesDto.Year = item.Year;
-                          SalaryEmployeesDto.Month = item.Month;
-                          SalaryEmployeesDto.EmployeeCode = item.EmployeeCode;
-                          SalaryEmployeesDto.EmployeeName = item.EmployeeName;
-                          SalaryEmployeesDto.IdentificationNumber = item.IdentificationNumber;
-                          SalaryEmployeesDto.TotalSalary = item.TotalSalary;
-                          ListSalaryEmployeesDto.Add(SalaryEmployeesDto);
+                        SalaryEmployeesDto.Id = item.Id;
+                        SalaryEmployeesDto.FullName = item.EmployeeName + " " + item.EmployeeSurname;
+                        SalaryEmployeesDto.Division = item.Division;
+                        SalaryEmployeesDto.DivisionName = (await IDivisionServicesDomain.GetDivisionByDivisionId(item.Division)).Name;
 
-                          return item;
-                      });
+                        SalaryEmployeesDto.Position = item.Position;
+                        SalaryEmployeesDto.PositionName = (await IPositionServicesDomain.GetPositionByPositionId(item.Position)).Name;
+
+                        SalaryEmployeesDto.Grade = item.Grade;
+                        SalaryEmployeesDto.BeginDate = item.BeginDate;
+                        SalaryEmployeesDto.Birthday = item.Birthday;
+                        SalaryEmployeesDto.IdentificationNumber = item.IdentificationNumber;
+                        SalaryEmployeesDto.TotalSalary = item.TotalSalary;
+
+                        ListSalaryEmployeesDto.Add(SalaryEmployeesDto);
+                    }
 
                     ResultModel.Data = ListSalaryEmployeesDto;
                 }
@@ -76,36 +89,42 @@ namespace Services.Services
                 return ResultModel;
             }
         }
-         
+
         // - Empleados con la misma Oficina y Grado.
-        public async Task<ResultDto> GetEmployeesWithEqualsOfficeAndGradeByOfficeIdAndGrade(int OfficeId, int Grade)
+        public async Task<ResultDto> GetAllSalariesOfEmployees(int OfficeId, int Grade, int Position)
         {
             ResultDto ResultModel = new ResultDto();
-            List<EmployeesEqualsOfficeAndGradeDto> ListEmployeesEqualsOfficeAndGradeDto = new List<EmployeesEqualsOfficeAndGradeDto>();
+            List<SalaryEmployeesDto> ListSalaryEmployeesDto = new List<SalaryEmployeesDto>();
 
             try
             {
-                // hacer el disting de empleados 
-                var List = (await unitofwork.GetRepository<SALARY>().Get(x => x.Grade == Grade && x.Office == OfficeId)).OrderBy(x => x.EmployeeCode);
+                var List = (await unitofwork.GetRepository<SALARY>().Get()).OrderBy(x => x.EmployeeCode);
+                // var List = (await unitofwork.GetRepository<SALARY>().Get(x => x.Grade == Grade && x.Office == OfficeId)).OrderBy(x => x.EmployeeCode);
 
                 if (List.Any())
                 {
-                    var obj = List.Select(item =>
+                    foreach (var item in List)
                     {
-                        EmployeesEqualsOfficeAndGradeDto EmployeesEqualsOfficeAndGradeDto = new EmployeesEqualsOfficeAndGradeDto();
+                        SalaryEmployeesDto SalaryEmployeesDto = new SalaryEmployeesDto();
 
-                        EmployeesEqualsOfficeAndGradeDto.Id = item.Id;
-                        EmployeesEqualsOfficeAndGradeDto.EmployeeCode = item.EmployeeCode;
-                        EmployeesEqualsOfficeAndGradeDto.EmployeeName = item.EmployeeName;
-                        EmployeesEqualsOfficeAndGradeDto.EmployeeSurname = item.EmployeeName;
-                        EmployeesEqualsOfficeAndGradeDto.IdentificationNumber = item.IdentificationNumber;
+                        SalaryEmployeesDto.Id = item.Id;
+                        SalaryEmployeesDto.FullName = item.EmployeeName + " " + item.EmployeeSurname;
+                        SalaryEmployeesDto.Division = item.Division;
+                        SalaryEmployeesDto.DivisionName = (await IDivisionServicesDomain.GetDivisionByDivisionId(item.Division)).Name;
 
-                        ListEmployeesEqualsOfficeAndGradeDto.Add(EmployeesEqualsOfficeAndGradeDto);
+                        SalaryEmployeesDto.Position = item.Position;
+                        SalaryEmployeesDto.PositionName = (await IPositionServicesDomain.GetPositionByPositionId(item.Position)).Name;
 
-                        return item;
-                    });
+                        SalaryEmployeesDto.Grade = item.Grade;
+                        SalaryEmployeesDto.BeginDate = item.BeginDate;
+                        SalaryEmployeesDto.Birthday = item.Birthday;
+                        SalaryEmployeesDto.IdentificationNumber = item.IdentificationNumber;
+                        SalaryEmployeesDto.TotalSalary = item.TotalSalary;
 
-                    ResultModel.Data = ListEmployeesEqualsOfficeAndGradeDto;
+                        ListSalaryEmployeesDto.Add(SalaryEmployeesDto);
+                    }
+
+                    ResultModel.Data = ListSalaryEmployeesDto;
                 }
 
                 ResultModel.HasError = false;
@@ -123,7 +142,13 @@ namespace Services.Services
                 return ResultModel;
             }
         }
-         
+
+
+
+
+
+
+
         // - Empleados de todas las Oficinas y con el mismo Grado.
         // distin oficinas 
         public async Task<ResultDto> GetEmployeesWithEqualsGradeByGrade(int Grade)
@@ -174,7 +199,7 @@ namespace Services.Services
                 return ResultModel;
             }
         }
-         
+
         // - Empleados con la misma Posición y Grado.
         public async Task<ResultDto> GetEmployeesWithEqualsPositionAndGradeByPositionAndGrade(int Position, int Grade)
         {
@@ -224,7 +249,7 @@ namespace Services.Services
                 return ResultModel;
             }
         }
-         
+
         // - Empleados de todas las Posiciones y con el mismo Grado.
         // distin posiciones 
         public async Task<ResultDto> GetEmployeesWithEqualsGradeByGradexxx(int Grade)
